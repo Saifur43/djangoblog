@@ -1,10 +1,9 @@
 {% extends "header.html" %}
 {% block content %}
-<h3><a href="/blog/{{post.id}}">{{ post.title }}</a></h3>
-<h6> on {{ post.date }}</h6>
-
-<div class = "container">
-	{{ post.body|safe|linebreaks}}
-</div>
-<br><br>
+    <div class="container">
+        <h3><a href="{{ post.slug }}"> {{ post.title }}</a></h3>
+        <small>Published: {{ post.date }}</small>
+        <p>{{ post.body|safe|linebreaks }}</p>
+    </div>
+    <br><br>
 {% endblock %}

@@ -1,3 +1,17 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
+from .models import Post
 
-# Create your views here.
+
+class PostListView(ListView):
+    queryset = Post.objects.all().order_by('-date')
+    template_name = 'blog.html'
+
+
+class PostDetailView(DetailView):
+    template_name = 'post.html'
+    queryset = Post.objects.all()
+
+
+def contact(request):
+    return render(request, 'contact.html')
