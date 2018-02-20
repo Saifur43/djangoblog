@@ -6,6 +6,7 @@ from .models import Post
 class PostListView(ListView):
     queryset = Post.objects.all().order_by('-date')
     template_name = 'blog.html'
+    paginate_by = 2
 
 
 class PostDetailView(DetailView):
