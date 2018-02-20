@@ -1,10 +1,11 @@
-from django.conf.urls import url, include
-from django.views.generic import ListView, DetailView
-from blog.models import Post
+from django.conf.urls import url
+from .views import PostListView, PostDetailView, contact
 
-urlpatterns = [ url(r'^$', ListView.as_view(queryset=Post.objects.all().order_by("-date")[:25],
-                                            template_name="blog.html")),
-                url(r'^(?P<pk>\d+)$', DetailView.as_view(
-                    model=Post,
-                    template_name="post.html")),
-                ]
+
+app_name = 'blog'
+
+urlpatterns = [
+    url(r'^$', PostListView.as_view(), name='post_list'),
+    url(r'^contact/$',contact , name='contact'),
+    url(r'^(?P<slug>[\w-]+)/$', PostDetailView.as_view(), name='post_detail'),
+]
