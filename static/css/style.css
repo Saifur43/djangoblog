@@ -42,9 +42,10 @@ body{
 	color: #000;
 }
 .post_content .btn{
-	color: #fff;
-    background-color: #337ab7;
-    border-color: rgba(0,0,0,0.64);
+	color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
     transition: 0.5s;
 }
 .post_content .btn:hover{

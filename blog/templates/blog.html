@@ -3,31 +3,34 @@
 {% block content %}
     {% for post in object_list %}
     	 <div class="post_content"> 
-	        <h2><a href="{{ post.slug }}"> {{ post.title }}</a></h2>
+	        <h2><a href="{% url 'blog:post_detail' post.slug %}"> {{ post.title }}</a></h2>
 	        <small>Published: {{ post.date }}</small>
 	        <p>{{ post.body|truncatewords:30 }}</p>
 	        <a href="{{ post.slug }}" class="btn btn-info">Read More</a>
         </div>
     {% endfor %}
-    {% if is_paginated %}
-	  <ul class="pagination">
-	    {% if page_obj.has_previous %}
-	      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-	    {% else %}
-	      <li class="disabled"><span>&laquo;</span></li>
-	    {% endif %}
-	    {% for i in paginator.page_range %}
-	      {% if page_obj.number == i %}
-	        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-	      {% else %}
-	        <li><a href="?page={{ i }}">{{ i }}</a></li>
-	      {% endif %}
-	    {% endfor %}
-	    {% if page_obj.has_next %}
-	      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-	    {% else %}
-	      <li class="disabled"><span>&raquo;</span></li>
-	    {% endif %}
-  </ul>
-{% endif %}
+    <div class="paginate text-center">
+    	{% if is_paginated %}
+		  <ul class="pagination">
+		    {% if page_obj.has_previous %}
+		      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+		    {% else %}
+		      <li class="disabled"><span>&laquo;</span></li>
+		    {% endif %}
+		    {% for i in paginator.page_range %}
+		      {% if page_obj.number == i %}
+		        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+		      {% else %}
+		        <li><a href="?page={{ i }}">{{ i }}</a></li>
+		      {% endif %}
+		    {% endfor %}
+		    {% if page_obj.has_next %}
+		      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+		    {% else %}
+		      <li class="disabled"><span>&raquo;</span></li>
+		    {% endif %}
+	  	</ul>
+	{% endif %}
+    </div>
+    
 {% endblock %}
